@@ -8,12 +8,12 @@ class Oblivion
 {
     public static function init($env)
     {
-        $dir = dirname(__DIR__) . '/functions/';
+        $dir = __DIR__ . '/functions/';
         $dir = dir($dir);
         while ($arquivo = $dir->read()) {
             if ($arquivo == ".." || $arquivo == ".") {
             } else {
-                include '' . dirname(__DIR__) . '/functions/' . $arquivo . '';
+                include '' . __DIR__ . '/functions/' . $arquivo . '';
             }
         }
         $dir->close();
