@@ -1,19 +1,19 @@
 {
-    "name": "seidr/oblivion-bridge",
-    "description": "Helper functions that connect the Oblivion database to its different clients.",
-    "type": "library",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Seidr\\OblivionBridge\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Seidr",
-            "email": "seidr@byseidr.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {}
+  "name": "seidr/oblivion-bridge",
+  "description": "Helper functions that connect the Oblivion database to its different clients.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Oblivion\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Seidr",
+      "email": "seidr@byseidr.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {}
 }
