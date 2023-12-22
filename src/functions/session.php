@@ -145,6 +145,11 @@ define('premiar_codigo_emblema', $_ENV['PAINEL_PREMIAR_CODIGO_EMBLEMA']);
 // Data
 define('ano', date("Y"));
 define('dia', date("d"));
+// Banco de dados
+define('conn', $conn);
+// Notícias
+define('conn', $noticia);
+define('conn', $noticiafinal);
 
 if (camuflarclient == 1) {
     $_ENV['CONNECTION_INFO_HOST'] = camuflar($_ENV['CONNECTION_INFO_HOST']);
