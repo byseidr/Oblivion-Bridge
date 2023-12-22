@@ -148,8 +148,8 @@ define('dia', date("d"));
 // Banco de dados
 define('conn', $conn);
 // Notícias
-define('conn', $noticia);
-define('conn', $noticiafinal);
+define('noticia', $noticia);
+define('noticiafinal', $noticiafinal);
 
 if (camuflarclient == 1) {
     $_ENV['CONNECTION_INFO_HOST'] = camuflar($_ENV['CONNECTION_INFO_HOST']);
