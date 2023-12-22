@@ -151,6 +151,7 @@ define('conn', $conn);
 define('noticiafinal', $noticiafinal);
 // Usuário
 define('cur', $cur);
+define('roupa', $roupa);
 
 if (camuflarclient == 1) {
     $_ENV['CONNECTION_INFO_HOST'] = camuflar($_ENV['CONNECTION_INFO_HOST']);
