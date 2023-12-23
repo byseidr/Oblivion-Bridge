@@ -65,14 +65,13 @@ if (isset($_SESSION['usuario']) && isset($sessao)) {
     $qs = mysqli_query($conn, $zaq) or die(mysqli_error($conn));
     $dados = $qs->fetch_assoc();
     {
-        define("status", $dados['motto']);
-        define("credits", $dados['credits']);
-        define("roupanova", $dados['look']);
-        define("online", $dados['online']);
-        define("rank", $dados['rank']);
-        define("id", $dados['id']);
-        $referidos = $dados['referidos'];
+        $status = $dados['motto'];
+        $user_creditos = $dados['credits'];
+        $roupanova = $dados['look'];
+        $online = $dados['online'];
         $rank = $dados['rank'];
+        $id = $dados['id'];
+        $referidos = $dados['referidos'];
         $ip = $dados['ip_current'];
         $roupa = $dados['look'];
         if (u == "/registro") {
@@ -151,7 +150,22 @@ define('conn', $conn);
 define('noticiafinal', $noticiafinal);
 // Usuário
 define('cur', $cur);
+define("id", $id);
+define("ip", $ip);
+define('mns', $mns);
+define("online", $online);
+define("rank", $rank);
+define('referidos', $referidos);
 define('roupa', $roupa);
+define("roupanova", $roupanova);
+define('rpns', $rpns);
+define('sessao', $sessao);
+define("status", $status);
+define('user_creditos', $user_creditos);
+define('user_eventos', $user_eventos);
+define('user_login', $user_login);
+define('user_missao', $user_missao);
+define('user_promocao', $user_promocao);
 
 if (camuflarclient == 1) {
     $_ENV['CONNECTION_INFO_HOST'] = camuflar($_ENV['CONNECTION_INFO_HOST']);
