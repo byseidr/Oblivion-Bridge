@@ -49,7 +49,7 @@ if (isset($_SESSION['usuario']) && isset($_SESSION['senha'])) {
             case '/config':
                 header("Location: /");
             break;
-            case '/client':
+            case '/'.$_ENV['CLIENT_PATH']:
                 header("Location: /");
             break;
             case '/produtos':
@@ -96,7 +96,7 @@ if (isset($_SESSION['usuario']) && isset($sessao)) {
         case '/config':
             header("Location: /");
         break;
-        case '/client':
+        case '/'.$_ENV['CLIENT_PATH']:
             header("Location: /");
         break;
         case '/produtos':
@@ -118,6 +118,7 @@ define('log', $_ENV['SITE_LOGIN']);
 define('avatarimage', $_ENV['SITE_AVATAR']);
 define('redirecionamentos', $_ENV['SITE_RED']);
 define('rank_minimo_manutencao', $_ENV['SITE_RANK_MINIMO']);
+define('client', $_ENV['CLIENT_PATH']);
 define('camuflarclient', $_ENV['SITE_CMFCLIENT']);
 // Util
 define('facebook', $_ENV['TEMA_FACEBOOK']);
