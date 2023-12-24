@@ -1,21 +1,16 @@
 <?php
-error_reporting(E_ALL); 
-ini_set('display_errors', 'On'); 
-/***
- *                _
- *               | |
- *      ___  __ _| |___  __ _
- *     / __|/ _` | / __|/ _` |
- *     \__ \ (_| | \__ \ (_| |
- *     |___/\__,_|_|___/\__,_|
- *     GitHub: https://github.com/victorlbs/Salsa-CMS-for-Arcturus-Emulator/
- *
-*/
+
+namespace Oblivion;
+
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+
 if (strrpos($_SERVER["REQUEST_URI"], ".php") || strrpos($_SERVER["REQUEST_URI"], ".php") !== false) {
         header("Location: /");
         exit;
 }
-class SalsaSSo {
+
+class Game {
     static function sso($conn) {
         $sso = strtotime("Now");
         $ssonome = "Salsa-";

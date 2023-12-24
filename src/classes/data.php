@@ -1,19 +1,13 @@
-<?php 
-/***
- *                _
- *               | |
- *      ___  __ _| |___  __ _
- *     / __|/ _` | / __|/ _` |
- *     \__ \ (_| | \__ \ (_| |
- *     |___/\__,_|_|___/\__,_|
- *     GitHub: https://github.com/victorlbs/Salsa-CMS-for-Arcturus-Emulator/
- *
- */
+<?php
+
+namespace Oblivion;
+
 if (strrpos($_SERVER["REQUEST_URI"], ".php") || strrpos($_SERVER["REQUEST_URI"], ".php") !== false) {
     header("Location: /");
     exit;
 }
-class SalsaDado
+
+class Data
 {
     static function usuarios_online($conn)
     {

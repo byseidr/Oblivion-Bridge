@@ -1,15 +1,8 @@
 <?php
-/***
- *                _
- *               | |
- *      ___  __ _| |___  __ _
- *     / __|/ _` | / __|/ _` |
- *     \__ \ (_| | \__ \ (_| |
- *     |___/\__,_|_|___/\__,_|
- *     GitHub: https://github.com/victorlbs/Salsa-CMS-for-Arcturus-Emulator/
- *
-*/
-class SalsaConta {
+
+namespace Oblivion;
+
+class Account {
     static function conectar($conn) {
         if (isset($_POST['conectar'])) {
             $usuario = fs($_POST['usuario_salsa']);

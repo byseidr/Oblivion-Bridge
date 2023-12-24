@@ -18,7 +18,6 @@ if (strrpos($_SERVER["REQUEST_URI"], ".php") || strrpos($_SERVER["REQUEST_URI"],
 $conn = mysqli_connect($_ENV['DATABASE_HOSTNAME'], $_ENV['DATABASE_USERNAME'], $_ENV['DATABASE_PASSWORD'], $_ENV['DATABASE_NAME']);
 if (!$conn) {
 ?>
-
 <html>
 <head>
 	<title>Erro - Não foi possível conectar-se ao banco de dados</title>
@@ -38,10 +37,9 @@ if (!$conn) {
 
 
 </div>
-   <?php
-    exit;
-}
-?>
 <body>
 </html>
- 
+<?php
+exit;
+}
+?>

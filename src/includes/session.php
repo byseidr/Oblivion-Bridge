@@ -10,7 +10,6 @@
  *
  *
 */
-include 'database.php';
 define('u', $_SERVER["REQUEST_URI"]);
 if (isset($_SESSION['usuario']) && isset($_SESSION['senha'])) {
     $senhageradasesaao = password_hash($_SESSION['senha'], PASSWORD_BCRYPT);
