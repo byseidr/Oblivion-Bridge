@@ -154,23 +154,23 @@ class Session
         // Notícias
         define('NOTICIAFINAL', $noticiafinal);
         // Usuário
-        define('CUR', $cur);
-        define('ID', $id);
-        define('IP', $ip);
-        define('MNS', $mns);
-        define('ONLINE', $online);
-        define('RANK', $rank);
-        define('REFERIDOS', $referidos);
-        define('ROUPA', $roupa);
-        define('ROUPANOVA', $roupanova);
-        define('RPNS', $rpns);
-        define('SESSAO', $sessao);
-        define('STATUS', $status);
-        define('USER_CREDITOS', $user_creditos);
-        define('USER_EVENTOS', $user_eventos);
-        define('USER_LOGIN', $user_login);
-        define('USER_MISSAO', $user_missao);
-        define('USER_PROMOCAO', $user_promocao);
+        define('CUR', $cur ?? NULL);
+        define('ID', $id ?? NULL);
+        define('IP', $ip ?? NULL);
+        define('MNS', $mns ?? NULL);
+        define('ONLINE', $online ?? NULL);
+        define('RANK', $rank ?? NULL);
+        define('REFERIDOS', $referidos ?? NULL);
+        define('ROUPA', $roupa ?? NULL);
+        define('ROUPANOVA', $roupanova ?? NULL);
+        define('RPNS', $rpns ?? NULL);
+        define('SESSAO', $sessao ?? NULL);
+        define('STATUS', $status ?? NULL);
+        define('USER_CREDITOS', $user_creditos ?? NULL);
+        define('USER_EVENTOS', $user_eventos ?? NULL);
+        define('USER_LOGIN', $user_login ?? NULL);
+        define('USER_MISSAO', $user_missao ?? NULL);
+        define('USER_PROMOCAO', $user_promocao ?? NULL);
 
         if (CAMUFLARCLIENT == 1) {
             $_ENV['CONNECTION_INFO_HOST'] = Filter::camuflar($_ENV['CONNECTION_INFO_HOST']);
