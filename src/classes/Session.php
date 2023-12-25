@@ -2,7 +2,7 @@
 
 namespace Oblivion;
 
-include 'Filter.php';
+include_once 'Filter.php';
 
 class Session
 {
