@@ -2,7 +2,9 @@
 
 namespace Oblivion;
 
-class Account {
+include 'Db.php';
+
+class Account extends Db {
     static function conectar() {
         if (isset($_POST['conectar'])) {
             $usuario = fs($_POST['usuario_salsa']);
@@ -14,19 +16,19 @@ class Account {
                 $erro = 1;
             } else {
                 $logar = "SELECT * FROM users WHERE username='" . $usuario . "'";
-                $lg = mysqli_query($conn, $logar) or die(mysqli_error($conn));
-                if ($ra = mysqli_query($conn, $logar)) {
+                $lg = parent::query($logar) or die(parent::error());
+                if ($ra = parent::query($logar)) {
                     $existe = mysqli_num_rows($ra);
                     if ($existe == $vlsalsa) {
                         $busca = $lg->fetch_assoc(); {
                             $existesenha = $busca['password'];
                             if (password_verify($senha, $existesenha)) {
                                 $ban = "SELECT * FROM bans WHERE user_id ='" . $busca['id'] . "' AND type='account'";
-                                if ($ra2 = mysqli_query($conn, $ban)) {
+                                if ($ra2 = parent::query($ban)) {
                                     $existe2 = mysqli_num_rows($ra2);
                                     if ($existe2 == $vlsalsa) {
                                         $a = $ban;
-                                        $c = mysqli_query($conn, $a) or die(mysqli_error($conn));
+                                        $c = parent::query($a) or die(parent::error());
                                         while ($b = $c->fetch_assoc()) {
                                             $_SESSION['erro'] = '
                                                 Você está banido pelo seguinte motivo: ' . $b['ban_reason'] . ' e ficará banido até ' . date('d/m/Y', $b['ban_expire']) . '. Você pode contestar seu banimento em nossa página do Facebook.';
@@ -35,11 +37,11 @@ class Account {
                                     }
                                 }
                                 $ban3 = "SELECT * FROM bans WHERE ip ='" . $_SERVER['REMOTE_ADDR'] . "' AND type='ip'";
-                                if ($ra4 = mysqli_query($conn, $ban3)) {
+                                if ($ra4 = parent::query($ban3)) {
                                     $existe3 = mysqli_num_rows($ra4);
                                     if ($existe3 == $vlsalsa) {
                                         $a = $ban3;
-                                        $c2 = mysqli_query($conn, $a) or die(mysqli_error($conn));
+                                        $c2 = parent::query($a) or die(parent::error());
                                         while ($b2 = $c2->fetch_assoc()) {
                                             $_SESSION['erro'] = 'Você está banido por IP e não pode criar novas contas, você está banido pelo seguinte motivo: ' . $b2['ban_reason'] . ' e ficará banido até ' . date('d/m/Y', $b2['ban_expire']) . '. Você pode contestar seu banimento em nossa página do Facebook.';
                                             $erro = 1;
@@ -59,7 +61,7 @@ class Account {
                                     $_SESSION['usuario'] = $usuario;
                                     $_SESSION['senha'] = $senhagerada;
                                     $ip = "UPDATE users SET ip_current='" . $_SERVER['REMOTE_ADDR'] . "' WHERE username='" . $usuario . "'";
-                                    $conn->query($ip);
+                                    parent::query($ip);
                                     exit(header("Location: /me"));
                                 }
                             } else {
@@ -97,12 +99,12 @@ class Account {
                 $erro = 1;
             } else {
                 $ban3 = "SELECT * FROM bans WHERE ip ='" . $_SERVER['REMOTE_ADDR'] . "' AND type='ip'";
-                if ($ra4 = mysqli_query($conn, $ban3)) {
+                if ($ra4 = parent::query($ban3)) {
                     $existe3 = mysqli_num_rows($ra4);
                     $vlsalsa = 1;
                     if ($existe3 == $vlsalsa) {
                         $a = $ban3;
-                        $c2 = mysqli_query($conn, $a) or die(mysqli_error($conn));
+                        $c2 = parent::query($a) or die(parent::error());
                         while ($b2 = $c2->fetch_assoc()) {
                             $_SESSION['erro'] = 'Você está banido por IP e não pode criar novas contas, você está banido pelo seguinte motivo: <b>' . $b['ban_reason'] . '</b> e ficará banido até ' . date('d/m/Y', $b['ban_expire']) . '. Você pode contestar seu banimento em nossa página do Facebook.';
                             $erro = 1;
@@ -110,14 +112,14 @@ class Account {
                     }
                 }
                 $qra = "SELECT * FROM users WHERE username='" . $usuario . "'";
-                if ($ra = mysqli_query($conn, $qra)) {
+                if ($ra = parent::query($qra)) {
                     $existe = mysqli_num_rows($ra);
                     if ($existe == $vlsalsa) {
                         $_SESSION['erro'] = 'O nome de usuário já existe, por gentileza escolha outro.';
                         $erro = 1;
                     }
                     $qra2 = "SELECT * FROM users WHERE ip_current='" . $_SERVER['REMOTE_ADDR'] . "'";
-                    if ($ra2 = mysqli_query($conn, $qra2)) {
+                    if ($ra2 = parent::query($qra2)) {
                         $existe2 = mysqli_num_rows($ra2);
                         if ($existe2 > contasporip) {
                             $_SESSION['erro'] = 'Você só pode criar ' . contasporip . ' contas por IP.';
@@ -144,7 +146,7 @@ class Account {
                                                 $_SESSION['erro'] = $_SESSION['erro'];
                                             } else {
                                                 $xy = "INSERT INTO `users` (`username`, `password`, `mail`, `rank`, `motto`, `account_created`, `last_login`, `look`, `home_room`, `ip_current`, `credits`, `ip_register`) VALUES ('$usuario', '$senhagerada', '$email', '1', '" . missao . "', '" . time() . "', '" . time() . "', '" . visual . "', '" . quartoinicial . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . creditos . "', '" . $_SERVER['REMOTE_ADDR'] . "');";
-                                                $conn->query($xy);
+                                                parent::query($xy);
                                                 $_SESSION['usuario'] = $usuario;
                                                 $_SESSION['senha'] = $senhagerada;
                                                 exit(header("Location: /me"));
@@ -177,10 +179,10 @@ class Account {
                 $erro = 0;
             }
             $m = "UPDATE users SET motto='" . $missao . "' WHERE username='" . usuario . "'";
-            $conn->query($m);
+            parent::query($m);
             if ($confirmacao != $email) {
                 $qra = "SELECT * FROM users WHERE mail='" . $email . "'";
-                if ($ra = mysqli_query($conn, $qra)) {
+                if ($ra = parent::query($qra)) {
                     $existe = mysqli_num_rows($ra);
                     if ($existe == $vlsalsa) {
                         $_SESSION['erro'] = 'O e-mail  informado já está em uso, por gentileza escolha outro.';
@@ -189,13 +191,13 @@ class Account {
                     mysqli_free_result($ra);
                 }
                 $m = "UPDATE users SET mail='" . $email . "' WHERE username='" . usuario . "'";
-                $conn->query($m);
+                parent::query($m);
                 $erro = 0;
             }
             if (!empty($dc)) {
                 $qra = "SELECT * FROM users WHERE discord='" . $dc . "'";
                 $vlsalsa = 1;
-                if ($ra = mysqli_query($conn, $qra)) {
+                if ($ra = parent::query($qra)) {
                     $existe = mysqli_num_rows($ra);
                     if ($existe == $vlsalsa) {
                         $_SESSION['erro'] = 'O discord informado já está em uso, por gentileza escolha outro.';
@@ -204,12 +206,12 @@ class Account {
                     mysqli_free_result($ra);
                 }
                 $m = "UPDATE users SET discord='" . $dc . "' WHERE username='" . usuario . "'";
-                $conn->query($m);
+                parent::query($m);
             }
 
             if (!empty($capa)) {
                 $m = "UPDATE users SET capa='" . $capa . "' WHERE username='" . usuario . "'";
-                $conn->query($m);
+                parent::query($m);
             }
             if (isset($erro)) {
                 if ($erro == 1)
@@ -230,7 +232,7 @@ class Account {
                 $_SESSION['erro'] = 'As publicações estão desativadas no momento.';
             } else {
                 $sql31 = "SELECT * FROM users WHERE username='" . usuario . "'";
-                $query10 = mysqli_query($conn, $sql31) or die(mysqli_error($conn));
+                $query10 = parent::query($sql31) or die(parent::error());
                 while ($rows = $query10->fetch_assoc()) {
                     if ($rows['post_hoje'] == dia && $rows['rank'] == 1) {
                         $_SESSION['erro'] = 'Você só pode fazer uma publicação por dia.';
@@ -250,10 +252,10 @@ class Account {
                                 if ($erro == 1) echo $_SESSION['erro'];
                             } else {
                                 $m = "INSERT INTO `salsa_posts` (`postagem`, `usuario`, `data`, `staff`, `look`) VALUES ('$postagem', '$nome', '$data', '$staff', '$roupa');";
-                                $conn->query($m);
+                                parent::query($m);
                                 $_SESSION['erro'] = 'Você publicou <b>"' . $postagem . '"</b> com sucesso!';
                                 $m2 = "UPDATE users SET post_hoje='" . dia . "' WHERE username='" . usuario . "'";
-                                $conn->query($m2);
+                                parent::query($m2);
                             }
                         }
                     }
@@ -264,16 +266,16 @@ class Account {
     static function comprarpontos() {
         if (isset($_POST['comprar'])) {
             $sql31 = "SELECT * FROM users WHERE username='" . usuario . "'";
-            $query10 = mysqli_query($conn, $sql31) or die(mysqli_error($conn));
+            $query10 = parent::query($sql31) or die(parent::error());
             while ($rows = $query10->fetch_assoc()) {
                 $creditos = $rows['credits'];
                 if ($creditos > 500000) {
                     $_SESSION['erro'] = 'Você comprou com sucesso!</div>';
                     $erro = 0;
                     $m = "UPDATE users SET credits = credits-500000 WHERE username = '" . usuario . "'";
-                    $conn->query($m);
+                    parent::query($m);
                     $m2 = "UPDATE `users_settings` SET `achievement_score` = '1000' WHERE `users_settings`.`user_id` = " . id . ";";
-                    $conn->query($m2);
+                    parent::query($m2);
                     exit;
                 } else {
                     $_SESSION['erro'] = 'Você não possui o valor necessário para adquirir o produto.';
@@ -309,12 +311,12 @@ class Account {
                     } else {
                         $yeah = $token1;
                         $sql31 = "SELECT * FROM users WHERE username='" . usuario . "'";
-                        $query10 = mysqli_query($conn, $sql31) or die(mysqli_error($conn));
+                        $query10 = parent::query($sql31) or die(parent::error());
                         while ($rows = $query10->fetch_assoc()) {
                             $visual = $rows['look'];
                             $nome = $rows['username'];
                             $m2 = "INSERT INTO `salsa_postagens` (`usuario`, `mensagem`, `look`, `data`, `donoperfil`) VALUES ('$nome', '$recado', '$visual', '" . strtotime("Now") . "', '$yeah');";
-                            $conn->query($m2);
+                            parent::query($m2);
                             $_SESSION['erro'] = 'Você deixou um recado: "' . $recado . '" com sucesso!';
                         }
                     }
@@ -327,7 +329,7 @@ class Account {
             $vlr1 = fs($_POST['id']);
             $vlr2 = fs($_POST['usuario']);
             $m2 = "UPDATE salsa_posts SET curtidas = curtidas+1 WHERE id = '" . $vlr1 . "'";
-            $conn->query($m2);
+            parent::query($m2);
             $_SESSION['erro'] = 'Você curtiu a publicação com sucesso.';
         }
     }
@@ -339,7 +341,7 @@ class Account {
                 $_SESSION['erro'] = 'Sua mensagem é inválida.';
             } else {
                 $m2 = "INSERT INTO `salsa_comentarios_noticia` (`usuario`, `data`, `look`, `mensagem`, `noticia`) VALUES ('" . usuario . "', '" . time() . "', '" . roupanova . "', '$vlr2', '$vlr1');";
-                $conn->query($m2);
+                parent::query($m2);
                 $_SESSION['erro'] = 'Você comentou ' . $vlr2 . '';
             }
         }
@@ -349,7 +351,7 @@ class Account {
             $vlr1 = fs($_POST['id']);
             $vlr2 = fs($_POST['id_dois']);
             $m2 = "INSERT INTO `messenger_friendrequests` (`user_to_id`, `user_from_id`) VALUES ('" . $vlr1 . "', '" . $vlr2 . "');";
-            $conn->query($m2);
+            parent::query($m2);
             $_SESSION['erro'] = 'Você enviou o convite com sucesso. Aguarde a outra parte aceitar.';
         }
     }
