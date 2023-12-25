@@ -2,7 +2,7 @@
 
 namespace Oblivion;
 
-include 'Db.php';
+include_once 'Db.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');

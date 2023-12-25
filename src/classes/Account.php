@@ -2,7 +2,7 @@
 
 namespace Oblivion;
 
-include 'Db.php';
+include_once 'Db.php';
 
 class Account extends Db {
     static function conectar() {

@@ -2,7 +2,7 @@
 
 namespace Oblivion;
 
-include 'Db.php';
+include_once 'Db.php';
 
 if (strrpos($_SERVER["REQUEST_URI"], ".php") || strrpos($_SERVER["REQUEST_URI"], ".php") !== false) {
     header("Location: /");
