@@ -8,7 +8,6 @@ class Oblivion
 {
     public static function init($env)
     {
-        include_once __DIR__ . '/includes/db.php';
         include_once __DIR__ . '/includes/filter.php';
         include_once __DIR__ . '/includes/session.php';
 
