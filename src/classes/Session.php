@@ -28,7 +28,7 @@ class Session
                     define('USUARIO', $cur);
                 }
 
-                if (u == "/index") {
+                if (U == "/index") {
                     header("Location: /me");
                 }
             } else {
@@ -39,7 +39,7 @@ class Session
                 $user_promocao = 0;
                 $user_eventos = 0;
                 $user_creditos = 0;
-                switch (u) {
+                switch (U) {
                     case '/me':
                         header("Location: /");
                     break;
@@ -71,7 +71,7 @@ class Session
                 $referidos = $dados['referidos'];
                 $ip = $dados['ip_current'];
                 $roupa = $dados['look'];
-                if (u == "/registro") {
+                if (U == "/registro") {
                     header("Location: /me");
                 }
             }
@@ -86,7 +86,7 @@ class Session
             $user_eventos = null;
             $user_creditos = null;
             define('USUARIO', $cur);
-            switch (u) {
+            switch (U) {
                 case '/me':
                     header("Location: /");
                 break;
@@ -103,7 +103,7 @@ class Session
                 break;
             }
         }
-        if ($cur != usuario || $cur != $sessao || $sessao != usuario) {
+        if ($cur != USUARIO || $cur != $sessao || $sessao != USUARIO) {
             session_destroy();
             header("Location: /");
         }
@@ -172,9 +172,9 @@ class Session
         define('USER_MISSAO', $user_missao);
         define('USER_PROMOCAO', $user_promocao);
 
-        if (camuflarclient == 1) {
-            $_ENV['CONNECTION_INFO_HOST'] = camuflar($_ENV['CONNECTION_INFO_HOST']);
-            $_ENV['CONNECTION_INFO_PORT'] = camuflar($_ENV['CONNECTION_INFO_PORT']);
+        if (CAMUFLARCLIENT == 1) {
+            $_ENV['CONNECTION_INFO_HOST'] = Filter::camuflar($_ENV['CONNECTION_INFO_HOST']);
+            $_ENV['CONNECTION_INFO_PORT'] = Filter::camuflar($_ENV['CONNECTION_INFO_PORT']);
         }
         if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
             $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];

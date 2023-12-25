@@ -9,7 +9,7 @@ class Account {
             $vlsalsa = 1;
             $senha = fs($_POST['senha_salsa']);
             $senhagerada = password_hash($senha, PASSWORD_BCRYPT);
-            if (log == 0) {
+            if (LOG == 0) {
                 $_SESSION['erro'] = 'O login está desativado';
                 $erro = 1;
             } else {
@@ -46,9 +46,9 @@ class Account {
                                         }
                                     }
                                 }
-                                if ($busca['rank'] >= rank_minimo_manutencao && manutencao == 1) {
+                                if ($busca['rank'] >= RANK_MINIMO_MANUTENCAO && MANUTENCAO == 1) {
                                     $mns = 1;
-                                } elseif ($busca['rank'] < rank_minimo_manutencao && manutencao == 1) {
+                                } elseif ($busca['rank'] < RANK_MINIMO_MANUTENCAO && MANUTENCAO == 1) {
                                     $mns = 0;
                                     $_SESSION['erro'] = 'Apenas membros da equipe podem fazer login no momento.';
                                     $erro = 1;
@@ -84,7 +84,7 @@ class Account {
             $senharapetida = fs($_POST['senha_repetir']);
             $senhagerada = password_hash($senha, PASSWORD_BCRYPT);
             $usuariovic = strlen($usuario);
-            if (captcha == 1 || captcha == true) {
+            if (CAPTCHA == 1 || CAPTCHA == true) {
                 $scaptcha = fs($_POST['captcha']);
                 $scaptchar = fs($_POST['captcha_repetir']);
                 if ($scaptcha != $scaptchar) {
@@ -92,7 +92,7 @@ class Account {
                     $erro = 1;
                 }
             }
-            if (reg == 0) {
+            if (REG == 0) {
                 $_SESSION['erro'] = 'O registro está desativado.';
                 $erro = 1;
             } else {
@@ -119,8 +119,8 @@ class Account {
                     $qra2 = "SELECT * FROM users WHERE ip_current='" . $_SERVER['REMOTE_ADDR'] . "'";
                     if ($ra2 = $db->query($qra2)) {
                         $existe2 = mysqli_num_rows($ra2);
-                        if ($existe2 > contasporip) {
-                            $_SESSION['erro'] = 'Você só pode criar ' . contasporip . ' contas por IP.';
+                        if ($existe2 > CONTASPORIP) {
+                            $_SESSION['erro'] = 'Você só pode criar ' . CONTASPORIP . ' contas por IP.';
                             $erro = 1;
                         } else {
                             if ($usuariovic > 14 || $usuariovic < 3) {
@@ -143,7 +143,7 @@ class Account {
                                                 if ($erro == 1)
                                                 $_SESSION['erro'] = $_SESSION['erro'];
                                             } else {
-                                                $xy = "INSERT INTO `users` (`username`, `password`, `mail`, `rank`, `motto`, `account_created`, `last_login`, `look`, `home_room`, `ip_current`, `credits`, `ip_register`) VALUES ('$usuario', '$senhagerada', '$email', '1', '" . missao . "', '" . time() . "', '" . time() . "', '" . visual . "', '" . quartoinicial . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . creditos . "', '" . $_SERVER['REMOTE_ADDR'] . "');";
+                                                $xy = "INSERT INTO `users` (`username`, `password`, `mail`, `rank`, `motto`, `account_created`, `last_login`, `look`, `home_room`, `ip_current`, `credits`, `ip_register`) VALUES ('$usuario', '$senhagerada', '$email', '1', '" . MISSAO . "', '" . time() . "', '" . time() . "', '" . VISUAL . "', '" . QUARTOINICIAL . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . CREDITOS . "', '" . $_SERVER['REMOTE_ADDR'] . "');";
                                                 $db->query($xy);
                                                 $_SESSION['usuario'] = $usuario;
                                                 $_SESSION['senha'] = $senhagerada;
@@ -176,7 +176,7 @@ class Account {
             {
                 $erro = 0;
             }
-            $m = "UPDATE users SET motto='" . $missao . "' WHERE username='" . usuario . "'";
+            $m = "UPDATE users SET motto='" . $missao . "' WHERE username='" . USUARIO . "'";
             $db->query($m);
             if ($confirmacao != $email) {
                 $qra = "SELECT * FROM users WHERE mail='" . $email . "'";
@@ -188,7 +188,7 @@ class Account {
                     }
                     mysqli_free_result($ra);
                 }
-                $m = "UPDATE users SET mail='" . $email . "' WHERE username='" . usuario . "'";
+                $m = "UPDATE users SET mail='" . $email . "' WHERE username='" . USUARIO . "'";
                 $db->query($m);
                 $erro = 0;
             }
@@ -203,12 +203,12 @@ class Account {
                     }
                     mysqli_free_result($ra);
                 }
-                $m = "UPDATE users SET discord='" . $dc . "' WHERE username='" . usuario . "'";
+                $m = "UPDATE users SET discord='" . $dc . "' WHERE username='" . USUARIO . "'";
                 $db->query($m);
             }
 
             if (!empty($capa)) {
-                $m = "UPDATE users SET capa='" . $capa . "' WHERE username='" . usuario . "'";
+                $m = "UPDATE users SET capa='" . $capa . "' WHERE username='" . USUARIO . "'";
                 $db->query($m);
             }
             if (isset($erro)) {
@@ -226,22 +226,22 @@ class Account {
     }
     static function publicar($db) {
         if (isset($_POST['postar'])) {
-            if (postagens == 0) {
+            if (POSTAGENS == 0) {
                 $_SESSION['erro'] = 'As publicações estão desativadas no momento.';
             } else {
-                $sql31 = "SELECT * FROM users WHERE username='" . usuario . "'";
+                $sql31 = "SELECT * FROM users WHERE username='" . USUARIO . "'";
                 $query10 = $db->query($sql31) or die($db->error());
                 while ($rows = $query10->fetch_assoc()) {
-                    if ($rows['post_hoje'] == dia && $rows['rank'] == 1) {
+                    if ($rows['post_hoje'] == DIA && $rows['rank'] == 1) {
                         $_SESSION['erro'] = 'Você só pode fazer uma publicação por dia.';
                         $erro = 1;
                     } else {
                         $postagem = fs(rmdominio($_POST['postagem']));
-                        if (rank > 4) $staff = 1;
+                        if (RANK > 4) $staff = 1;
                         else $staff = 0;
-                        $nome = usuario;
+                        $nome = USUARIO;
                         $data = strtotime("Now");
-                        $roupa = roupanova;
+                        $roupa = ROUPANOVA;
                         if (empty($postagem)) {
                             $_SESSION['erro'] = 'Sua mensagem é inválida.';
                             $erro = 1;
@@ -252,7 +252,7 @@ class Account {
                                 $m = "INSERT INTO `salsa_posts` (`postagem`, `usuario`, `data`, `staff`, `look`) VALUES ('$postagem', '$nome', '$data', '$staff', '$roupa');";
                                 $db->query($m);
                                 $_SESSION['erro'] = 'Você publicou <b>"' . $postagem . '"</b> com sucesso!';
-                                $m2 = "UPDATE users SET post_hoje='" . dia . "' WHERE username='" . usuario . "'";
+                                $m2 = "UPDATE users SET post_hoje='" . DIA . "' WHERE username='" . USUARIO . "'";
                                 $db->query($m2);
                             }
                         }
@@ -263,16 +263,16 @@ class Account {
     }
     static function comprarpontos($db) {
         if (isset($_POST['comprar'])) {
-            $sql31 = "SELECT * FROM users WHERE username='" . usuario . "'";
+            $sql31 = "SELECT * FROM users WHERE username='" . USUARIO . "'";
             $query10 = $db->query($sql31) or die($db->error());
             while ($rows = $query10->fetch_assoc()) {
                 $creditos = $rows['credits'];
                 if ($creditos > 500000) {
                     $_SESSION['erro'] = 'Você comprou com sucesso!</div>';
                     $erro = 0;
-                    $m = "UPDATE users SET credits = credits-500000 WHERE username = '" . usuario . "'";
+                    $m = "UPDATE users SET credits = credits-500000 WHERE username = '" . USUARIO . "'";
                     $db->query($m);
-                    $m2 = "UPDATE `users_settings` SET `achievement_score` = '1000' WHERE `users_settings`.`user_id` = " . id . ";";
+                    $m2 = "UPDATE `users_settings` SET `achievement_score` = '1000' WHERE `users_settings`.`user_id` = " . ID . ";";
                     $db->query($m2);
                     exit;
                 } else {
@@ -308,7 +308,7 @@ class Account {
                         if ($erro == 1) echo $_SESSION['erro'];
                     } else {
                         $yeah = $token1;
-                        $sql31 = "SELECT * FROM users WHERE username='" . usuario . "'";
+                        $sql31 = "SELECT * FROM users WHERE username='" . USUARIO . "'";
                         $query10 = $db->query($sql31) or die($db->error());
                         while ($rows = $query10->fetch_assoc()) {
                             $visual = $rows['look'];
@@ -338,7 +338,7 @@ class Account {
             if (empty($vlr2)) {
                 $_SESSION['erro'] = 'Sua mensagem é inválida.';
             } else {
-                $m2 = "INSERT INTO `salsa_comentarios_noticia` (`usuario`, `data`, `look`, `mensagem`, `noticia`) VALUES ('" . usuario . "', '" . time() . "', '" . roupanova . "', '$vlr2', '$vlr1');";
+                $m2 = "INSERT INTO `salsa_comentarios_noticia` (`usuario`, `data`, `look`, `mensagem`, `noticia`) VALUES ('" . USUARIO . "', '" . time() . "', '" . ROUPANOVA . "', '$vlr2', '$vlr1');";
                 $db->query($m2);
                 $_SESSION['erro'] = 'Você comentou ' . $vlr2 . '';
             }

@@ -30,7 +30,7 @@ class Hk
                         echo date('d/m/Y H:i', $tm);
                         $ate = date('d/m/Y H:i', $tm);
                         echo '</b></div>';
-                        $fnsalsa = "INSERT INTO `bans` (`user_id`, `ip`, `machine_id`, `user_staff_id`, `timestamp`, `ban_expire`, `ban_reason`, `type`, `cfh_topic`, `value`, `bantype`) VALUES ('" . $row2['id'] . "', '" . $row2['ip_current'] . "', '', '" . id . "', '" . strtotime("Now") . "', '" . $tm . "', '" . $vlr2 . "', 'account', '-1', '0', '0');";
+                        $fnsalsa = "INSERT INTO `bans` (`user_id`, `ip`, `machine_id`, `user_staff_id`, `timestamp`, `ban_expire`, `ban_reason`, `type`, `cfh_topic`, `value`, `bantype`) VALUES ('" . $row2['id'] . "', '" . $row2['ip_current'] . "', '', '" . ID . "', '" . strtotime("Now") . "', '" . $tm . "', '" . $vlr2 . "', 'account', '-1', '0', '0');";
                         $db->query($fnsalsa);
                     }
                 } else {
@@ -92,7 +92,7 @@ class Hk
             $vlr3    = fs($_POST['vlr3']);
             $vlr4    = $_POST['vlr4'];
             $vlr5    = fs($_POST['vlr5']);
-            $fnsalsa = "INSERT INTO `cms_news` (`title`, `image`, `shortstory`, `longstory`, `author`, `date`, `type`, `roomid`, `look`, `noticia_ativa`) VALUES ('" . $vlr2 . "', '" . $vlr4 . "', '" . $vlr3 . "', '" . $vlr1 . "', '" . usuario . "', '" . strtotime("Now") . "', '1', '1', '" . roupanova . "', '" . $vlr5 . "');";
+            $fnsalsa = "INSERT INTO `cms_news` (`title`, `image`, `shortstory`, `longstory`, `author`, `date`, `type`, `roomid`, `look`, `noticia_ativa`) VALUES ('" . $vlr2 . "', '" . $vlr4 . "', '" . $vlr3 . "', '" . $vlr1 . "', '" . USUARIO . "', '" . strtotime("Now") . "', '1', '1', '" . ROUPANOVA . "', '" . $vlr5 . "');";
             $db->query($fnsalsa);
             echo '<div class="alert alert-success" role="alert">';
             echo 'A notícia foi publicada com sucesso.';
@@ -112,7 +112,7 @@ class Hk
             }
             echo '<div class="alert alert-success" role="alert">';
             echo 'O usuário recebeu o emblema com sucesso.';
-            echo '<img src="' . urlemblemas . '/' . $vlr2 . '.gif">';
+            echo '<img src="' . URLEMBLEMAS . '/' . $vlr2 . '.gif">';
             echo '</div>';
         }
     }
@@ -139,36 +139,36 @@ class Hk
             $vlsalsa = 0;
             $query3 = $db->query($q) or die($db->error());
             while ($row5 = $query3->fetch_assoc()) {
-                $ban = "SELECT * FROM users_badges WHERE user_id='" . $row5['id'] . "' and badge_code='" . premiar_codigo_emblema . "1'";
+                $ban = "SELECT * FROM users_badges WHERE user_id='" . $row5['id'] . "' and badge_code='" . PREMIAR_CODIGO_EMBLEMA . "1'";
                 $lg = $db->query($ban) or die($db->error());
                 if ($ra = $db->query($ban)) {
                     $existe = mysqli_num_rows($ra);
                     if ($existe == $vlsalsa) {
-                        $fnsalsa2 = "INSERT INTO `users_badges` (`user_id`, `slot_id`, `badge_code`) VALUES ('" . $row5['id'] . "', '0', '" . premiar_codigo_emblema . "1');";
+                        $fnsalsa2 = "INSERT INTO `users_badges` (`user_id`, `slot_id`, `badge_code`) VALUES ('" . $row5['id'] . "', '0', '" . PREMIAR_CODIGO_EMBLEMA . "1');";
                         $db->query($fnsalsa2);
                         $fnsalsa = "UPDATE users SET pontos_evento = pontos_evento+1 WHERE username = '" . $vlr1 . "'";
                         $db->query($fnsalsa);
-                        $fnsalsa4 = "UPDATE users SET credits = credits+" . premiar_creditos . " WHERE username = '" . $vlr1 . "'";
+                        $fnsalsa4 = "UPDATE users SET credits = credits+" . PREMIAR_CREDITOS . " WHERE username = '" . $vlr1 . "'";
                         $db->query($fnsalsa4);
-                        $fnsalsa5 = "UPDATE  users_settings SET amout = amount+" . premiar_diamantes . " WHERE user_id = '" . $row5['id'] . "' and type='5'";
+                        $fnsalsa5 = "UPDATE  users_settings SET amout = amount+" . PREMIAR_DIAMANTES . " WHERE user_id = '" . $row5['id'] . "' and type='5'";
                         $db->query($fnsalsa5);
                         echo '<div class="alert alert-success" role="alert">';
-                        echo 'O usuário recebeu o emblema de nível <b>' . $resultado . '</b>, recebeu ' . premiar_diamantes . ' diamantes, ' . premiar_creditos . ' créditos e um ponto de evento no Hall da Fama';
+                        echo 'O usuário recebeu o emblema de nível <b>' . $resultado . '</b>, recebeu ' . PREMIAR_DIAMANTES . ' diamantes, ' . PREMIAR_CREDITOS . ' créditos e um ponto de evento no Hall da Fama';
                         echo '</div>';
                     } else {
                         $premiar      = $row5['pontos_evento'];
                         $premiarsalsa = 1;
                         $resultado    = $premiar + $premiarsalsa;
-                        $fnsalsa3     = "INSERT INTO `users_badges` (`user_id`, `slot_id`, `badge_code`) VALUES ('" . $row5['id'] . "', '0', '" . premiar_codigo_emblema . "" . $resultado . "');";
+                        $fnsalsa3     = "INSERT INTO `users_badges` (`user_id`, `slot_id`, `badge_code`) VALUES ('" . $row5['id'] . "', '0', '" . PREMIAR_CODIGO_EMBLEMA . "" . $resultado . "');";
                         $db->query($fnsalsa3);
-                        $fnsalsa4 = "UPDATE users SET credits = credits+" . premiar_creditos . " WHERE username = '" . $vlr1 . "'";
+                        $fnsalsa4 = "UPDATE users SET credits = credits+" . PREMIAR_CREDITOS . " WHERE username = '" . $vlr1 . "'";
                         $db->query($fnsalsa4);
                         $fnsalsa = "UPDATE users SET pontos_evento = pontos_evento+1 WHERE username = '" . $vlr1 . "'";
                         $db->query($fnsalsa);
-                        $fnsalsa5 = "UPDATE  users_settings SET amout = amount+" . premiar_diamantes . " WHERE user_id = '" . $row5['id'] . "' and type='5'";
+                        $fnsalsa5 = "UPDATE  users_settings SET amout = amount+" . PREMIAR_DIAMANTES . " WHERE user_id = '" . $row5['id'] . "' and type='5'";
                         $db->query($fnsalsa5);
                         echo '<div class="alert alert-success" role="alert">';
-                        echo 'O usuário recebeu o emblema de nível <b>NV' . $resultado . '</b>, recebeu ' . premiar_diamantes . ' diamantes, ' . premiar_creditos . ' créditos e um ponto de evento no Hall da Fama';
+                        echo 'O usuário recebeu o emblema de nível <b>NV' . $resultado . '</b>, recebeu ' . PREMIAR_DIAMANTES . ' diamantes, ' . PREMIAR_CREDITOS . ' créditos e um ponto de evento no Hall da Fama';
                         echo '</div>';
                     }
                 }
@@ -216,7 +216,7 @@ class Hk
             }
             echo '<div class="alert alert-success" role="alert">';
             echo 'O emblema foi removido do ' . $vlr1 . ' com sucesso.';
-            echo '<img src="' . urlemblemas . '/' . $vlr2 . '.gif">';
+            echo '<img src="' . URLEMBLEMAS . '/' . $vlr2 . '.gif">';
             echo '</div>';
         }
     }
@@ -228,7 +228,7 @@ class Hk
             $vlr3    = fs($_POST['vlr3']);
             $vlr4    = $_POST['vlr4'];
             $vlr6    = fs($_POST['id']);
-            $fnsalsa = "UPDATE `cms_news` SET `title` = '" . $vlr2 . "', `image` = '" . $vlr4 . "', `shortstory` = '" . $vlr2 . "', `longstory` = '" . $vlr1 . "', `author` = '" . usuario . "' WHERE `cms_news`.`id` = '" . $vlr6 . "';";
+            $fnsalsa = "UPDATE `cms_news` SET `title` = '" . $vlr2 . "', `image` = '" . $vlr4 . "', `shortstory` = '" . $vlr2 . "', `longstory` = '" . $vlr1 . "', `author` = '" . USUARIO . "' WHERE `cms_news`.`id` = '" . $vlr6 . "';";
             $db->query($fnsalsa);
             echo '<div class="alert alert-success" role="alert">';
             echo 'A notícia foi editada com sucesso.';

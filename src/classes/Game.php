@@ -16,8 +16,8 @@ class Game {
         $ssonome = "Salsa-";
         $ssofix = rand(1, 999);
         $ssoss = $sso - $ssofix;
-        $ssofinal = "" . $ssonome . "" . $ssoss . "-" . usuario . "-" . md5($sso) . "";
-        $m = "UPDATE users SET auth_ticket='" . $ssofinal . "' WHERE username='" . usuario . "'";
+        $ssofinal = "" . $ssonome . "" . $ssoss . "-" . USUARIO . "-" . md5($sso) . "";
+        $m = "UPDATE users SET auth_ticket='" . $ssofinal . "' WHERE username='" . USUARIO . "'";
         $db->query($m);
         echo $ssofinal;
     }
