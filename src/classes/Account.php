@@ -144,7 +144,7 @@ class Account {
                                                 $_SESSION['erro'] = $_SESSION['erro'];
                                             } else {
                                                 $xy = "INSERT INTO `users` (`username`, `password`, `mail`, `rank`, `motto`, `account_created`, `last_login`, `look`, `home_room`, `ip_current`, `credits`, `ip_register`) VALUES ('$usuario', '$senhagerada', '$email', '1', '" . MISSAO . "', '" . time() . "', '" . time() . "', '" . VISUAL . "', '" . QUARTOINICIAL . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . CREDITOS . "', '" . $_SERVER['REMOTE_ADDR'] . "');";
-                                                $db->query($xy);
+                                                $db->query($xy) or die($db->error());
                                                 $_SESSION['usuario'] = $usuario;
                                                 $_SESSION['senha'] = $senhagerada;
                                                 exit(header("Location: /me"));
