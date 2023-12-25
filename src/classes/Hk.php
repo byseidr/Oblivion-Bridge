@@ -12,9 +12,9 @@ class Hk
     static function banir_usuario($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1    = fs($_POST['vlr1']);
-            $vlr2    = fs($_POST['vlr2']);
-            $vlr3    = fs($_POST['vlr3']);
+            $vlr1    = Filter::fs($_POST['vlr1']);
+            $vlr2    = Filter::fs($_POST['vlr2']);
+            $vlr3    = Filter::fs($_POST['vlr3']);
             $vlsalsa = 1;
             $ban     = "SELECT * FROM users WHERE username='" . $vlr1 . "'";
             $lg = $db->query($ban) or die($db->error());
@@ -45,7 +45,7 @@ class Hk
     static function desbanir_usuario($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1 = fs($_POST['vlr1']);
+            $vlr1 = Filter::fs($_POST['vlr1']);
             $ban  = "SELECT * FROM users WHERE username='" . $vlr1 . "'";
             $query2 = $db->query($ban) or die($db->error());
             while ($row2 = $query2->fetch_assoc()) {
@@ -60,7 +60,7 @@ class Hk
     static function contas_fakes($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1 = fs($_POST['vlr1']);
+            $vlr1 = Filter::fs($_POST['vlr1']);
             $ban  = "SELECT * FROM users WHERE username='" . $vlr1 . "'";
             $query2 = $db->query($ban) or die($db->error());
             while ($row2 = $query2->fetch_assoc()) {
@@ -88,10 +88,10 @@ class Hk
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = $_POST['news'];
-            $vlr2    = fs($_POST['vlr2']);
-            $vlr3    = fs($_POST['vlr3']);
+            $vlr2    = Filter::fs($_POST['vlr2']);
+            $vlr3    = Filter::fs($_POST['vlr3']);
             $vlr4    = $_POST['vlr4'];
-            $vlr5    = fs($_POST['vlr5']);
+            $vlr5    = Filter::fs($_POST['vlr5']);
             $fnsalsa = "INSERT INTO `cms_news` (`title`, `image`, `shortstory`, `longstory`, `author`, `date`, `type`, `roomid`, `look`, `noticia_ativa`) VALUES ('" . $vlr2 . "', '" . $vlr4 . "', '" . $vlr3 . "', '" . $vlr1 . "', '" . USUARIO . "', '" . strtotime("Now") . "', '1', '1', '" . ROUPANOVA . "', '" . $vlr5 . "');";
             $db->query($fnsalsa);
             echo '<div class="alert alert-success" role="alert">';
@@ -102,8 +102,8 @@ class Hk
     static function dar_emblema($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1 = fs($_POST['vlr1']);
-            $vlr2 = fs($_POST['vlr2']);
+            $vlr1 = Filter::fs($_POST['vlr1']);
+            $vlr2 = Filter::fs($_POST['vlr2']);
             $q    = "SELECT * FROM users WHERE username='" . $vlr1 . "'";
             $query3 = $db->query($q) or die($db->error());
             while ($row5 = $query3->fetch_assoc()) {
@@ -119,7 +119,7 @@ class Hk
     static function dar_pontospromocao($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1 = fs($_POST['vlr1']);
+            $vlr1 = Filter::fs($_POST['vlr1']);
             $q    = "SELECT * FROM users WHERE username='" . $vlr1 . "'";
             $query3 = $db->query($q) or die($db->error());
             while ($row5 = $query3->fetch_assoc()) {
@@ -134,7 +134,7 @@ class Hk
     static function premiar_usuario($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1    = fs($_POST['vlr1']);
+            $vlr1    = Filter::fs($_POST['vlr1']);
             $q       = "SELECT * FROM users WHERE username='" . $vlr1 . "'";
             $vlsalsa = 0;
             $query3 = $db->query($q) or die($db->error());
@@ -178,8 +178,8 @@ class Hk
     static function dar_cargo($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1    = fs($_POST['vlr1']);
-            $vlr2    = fs($_POST['vlr2']);
+            $vlr1    = Filter::fs($_POST['vlr1']);
+            $vlr2    = Filter::fs($_POST['vlr2']);
             $fnsalsa = "UPDATE users SET rank ='" . $vlr2 . "' WHERE username = '" . $vlr1 . "'";
             $db->query($fnsalsa);
             echo '<div class="alert alert-success" role="alert">';
@@ -190,8 +190,8 @@ class Hk
     static function ativardstv_promocao($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1    = fs($_POST['vlr1']);
-            $vlr2    = fs($_POST['vlr2']);
+            $vlr1    = Filter::fs($_POST['vlr1']);
+            $vlr2    = Filter::fs($_POST['vlr2']);
             $fnsalsa = "UPDATE cms_news SET noticia_ativa ='" . $vlr2 . "' WHERE id = '" . $vlr1 . "'";
             $db->query($fnsalsa);
             echo '<div class="alert alert-success" role="alert">';
@@ -206,8 +206,8 @@ class Hk
     static function remover_emblema($db)
     {
         if (isset($_POST['fnvlr'])) {
-            $vlr1 = fs($_POST['vlr1']);
-            $vlr2 = fs($_POST['vlr2']);
+            $vlr1 = Filter::fs($_POST['vlr1']);
+            $vlr2 = Filter::fs($_POST['vlr2']);
             $q    = "SELECT * FROM users WHERE username='" . $vlr1 . "'";
             $query3 = $db->query($q) or die($db->error());
             while ($row5 = $query3->fetch_assoc()) {
@@ -224,10 +224,10 @@ class Hk
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = $_POST['news'];
-            $vlr2    = fs($_POST['vlr2']);
-            $vlr3    = fs($_POST['vlr3']);
+            $vlr2    = Filter::fs($_POST['vlr2']);
+            $vlr3    = Filter::fs($_POST['vlr3']);
             $vlr4    = $_POST['vlr4'];
-            $vlr6    = fs($_POST['id']);
+            $vlr6    = Filter::fs($_POST['id']);
             $fnsalsa = "UPDATE `cms_news` SET `title` = '" . $vlr2 . "', `image` = '" . $vlr4 . "', `shortstory` = '" . $vlr2 . "', `longstory` = '" . $vlr1 . "', `author` = '" . USUARIO . "' WHERE `cms_news`.`id` = '" . $vlr6 . "';";
             $db->query($fnsalsa);
             echo '<div class="alert alert-success" role="alert">';

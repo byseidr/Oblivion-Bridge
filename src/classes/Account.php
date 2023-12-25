@@ -5,9 +5,9 @@ namespace Oblivion;
 class Account {
     static function conectar($db) {
         if (isset($_POST['conectar'])) {
-            $usuario = fs($_POST['usuario_salsa']);
+            $usuario = Filter::fs($_POST['usuario_salsa']);
             $vlsalsa = 1;
-            $senha = fs($_POST['senha_salsa']);
+            $senha = Filter::fs($_POST['senha_salsa']);
             $senhagerada = password_hash($senha, PASSWORD_BCRYPT);
             if (LOG == 0) {
                 $_SESSION['erro'] = 'O login está desativado';
@@ -77,16 +77,16 @@ class Account {
     }
     static function registrar($db) {
         if (isset($_POST['registrar'])) {
-            $usuario = fs($_POST['usuario_salsa']);
-            $email = fs($_POST['email']);
+            $usuario = Filter::fs($_POST['usuario_salsa']);
+            $email = Filter::fs($_POST['email']);
             $vlsalsa = 1;
-            $senha = fs($_POST['senha_salsa']);
-            $senharapetida = fs($_POST['senha_repetir']);
+            $senha = Filter::fs($_POST['senha_salsa']);
+            $senharapetida = Filter::fs($_POST['senha_repetir']);
             $senhagerada = password_hash($senha, PASSWORD_BCRYPT);
             $usuariovic = strlen($usuario);
             if (CAPTCHA == 1 || CAPTCHA == true) {
-                $scaptcha = fs($_POST['captcha']);
-                $scaptchar = fs($_POST['captcha_repetir']);
+                $scaptcha = Filter::fs($_POST['captcha']);
+                $scaptchar = Filter::fs($_POST['captcha_repetir']);
                 if ($scaptcha != $scaptchar) {
                     $_SESSION['erro'] = 'O captcha inserido está incorreto.';
                     $erro = 1;
@@ -161,11 +161,11 @@ class Account {
     }
     static function configuracoes($db) {
         if (isset($_POST['enviar'])) {
-            $missao = fs(rmdominio($_POST['missao']));
-            $email = fs($_POST['email']);
-            $confirmacao = fs($_POST['confirmacao']);
-            $dc = fs(rmdominio($_POST['discord']));
-            $capa = fs($_POST['capa']);
+            $missao = Filter::fs(Filter::rmdominio($_POST['missao']));
+            $email = Filter::fs($_POST['email']);
+            $confirmacao = Filter::fs($_POST['confirmacao']);
+            $dc = Filter::fs(Filter::rmdominio($_POST['discord']));
+            $capa = Filter::fs($_POST['capa']);
             $missaog = strlen($missao);
             $vlsalsa = 1;
             if ($missaog > 13 || $missaog < 1) {
@@ -236,7 +236,7 @@ class Account {
                         $_SESSION['erro'] = 'Você só pode fazer uma publicação por dia.';
                         $erro = 1;
                     } else {
-                        $postagem = fs(rmdominio($_POST['postagem']));
+                        $postagem = Filter::fs(Filter::rmdominio($_POST['postagem']));
                         if (RANK > 4) $staff = 1;
                         else $staff = 0;
                         $nome = USUARIO;
@@ -289,16 +289,16 @@ class Account {
     }
     static function buscar_usuario() {
         if (isset($_POST['pesq'])) {
-            $buscar = fs($_POST['usuariobus']);
+            $buscar = Filter::fs($_POST['usuariobus']);
             header("Location: /perfil?=$buscar");
             exit;
         }
     }
     static function recado($db) {
         if (isset($_POST['enviar'])) {
-            $recado = fs(rmdominio($_POST['recado']));
-            $token1 = fs($_POST['token']);
-            $token2 = fs($_POST['token_salsa']);
+            $recado = Filter::fs(Filter::rmdominio($_POST['recado']));
+            $token1 = Filter::fs($_POST['token']);
+            $token2 = Filter::fs($_POST['token_salsa']);
             if (empty($recado)) {
                 $_SESSION['erro'] = 'Sua mensagem é inválida.';
                 $erro = 1;
@@ -324,8 +324,8 @@ class Account {
     }
     static function curtir($db) {
         if (isset($_POST['curtidas'])) {
-            $vlr1 = fs($_POST['id']);
-            $vlr2 = fs($_POST['usuario']);
+            $vlr1 = Filter::fs($_POST['id']);
+            $vlr2 = Filter::fs($_POST['usuario']);
             $m2 = "UPDATE salsa_posts SET curtidas = curtidas+1 WHERE id = '" . $vlr1 . "'";
             $db->query($m2);
             $_SESSION['erro'] = 'Você curtiu a publicação com sucesso.';
@@ -333,8 +333,8 @@ class Account {
     }
     static function comentar_noticia($db) {
         if (isset($_POST['comentar'])) {
-            $vlr1 = fs($_POST['id']);
-            $vlr2 = fs(rmdominio($_POST['mensagem']));
+            $vlr1 = Filter::fs($_POST['id']);
+            $vlr2 = Filter::fs(Filter::rmdominio($_POST['mensagem']));
             if (empty($vlr2)) {
                 $_SESSION['erro'] = 'Sua mensagem é inválida.';
             } else {
@@ -346,8 +346,8 @@ class Account {
     }
     static function adicionar_amigo($db) {
         if (isset($_POST['enviaramizade'])) {
-            $vlr1 = fs($_POST['id']);
-            $vlr2 = fs($_POST['id_dois']);
+            $vlr1 = Filter::fs($_POST['id']);
+            $vlr2 = Filter::fs($_POST['id_dois']);
             $m2 = "INSERT INTO `messenger_friendrequests` (`user_to_id`, `user_from_id`) VALUES ('" . $vlr1 . "', '" . $vlr2 . "');";
             $db->query($m2);
             $_SESSION['erro'] = 'Você enviou o convite com sucesso. Aguarde a outra parte aceitar.';
