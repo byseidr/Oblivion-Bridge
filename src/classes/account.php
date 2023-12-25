@@ -3,7 +3,7 @@
 namespace Oblivion;
 
 class Account {
-    static function conectar($conn) {
+    static function conectar() {
         if (isset($_POST['conectar'])) {
             $usuario = fs($_POST['usuario_salsa']);
             $vlsalsa = 1;
@@ -75,7 +75,7 @@ class Account {
             }
         }
     }
-    static function registrar($conn) {
+    static function registrar() {
         if (isset($_POST['registrar'])) {
             $usuario = fs($_POST['usuario_salsa']);
             $email = fs($_POST['email']);
@@ -159,7 +159,7 @@ class Account {
             }
         }
     }
-    static function configuracoes($conn) {
+    static function configuracoes() {
         if (isset($_POST['enviar'])) {
             $missao = fs(rmdominio($_POST['missao']));
             $email = fs($_POST['email']);
@@ -224,7 +224,7 @@ class Account {
             } 
         }
     }
-    static function publicar($conn) {
+    static function publicar() {
         if (isset($_POST['postar'])) {
             if (postagens == 0) {
                 $_SESSION['erro'] = 'As publicações estão desativadas no momento.';
@@ -261,7 +261,7 @@ class Account {
             }
         }
     }
-    static function comprarpontos($conn) {
+    static function comprarpontos() {
         if (isset($_POST['comprar'])) {
             $sql31 = "SELECT * FROM users WHERE username='" . usuario . "'";
             $query10 = mysqli_query($conn, $sql31) or die(mysqli_error($conn));
@@ -287,14 +287,14 @@ class Account {
             }
         }
     }
-    static function buscar_usuario($conn) {
+    static function buscar_usuario() {
         if (isset($_POST['pesq'])) {
             $buscar = fs($_POST['usuariobus']);
             header("Location: /perfil?=$buscar");
             exit;
         }
     }
-    static function recado($conn) {
+    static function recado() {
         if (isset($_POST['enviar'])) {
             $recado = fs(rmdominio($_POST['recado']));
             $token1 = fs($_POST['token']);
@@ -322,7 +322,7 @@ class Account {
             }
         }
     }
-    static function curtir($conn) {
+    static function curtir() {
         if (isset($_POST['curtidas'])) {
             $vlr1 = fs($_POST['id']);
             $vlr2 = fs($_POST['usuario']);
@@ -331,7 +331,7 @@ class Account {
             $_SESSION['erro'] = 'Você curtiu a publicação com sucesso.';
         }
     }
-    static function comentar_noticia($conn) {
+    static function comentar_noticia() {
         if (isset($_POST['comentar'])) {
             $vlr1 = fs($_POST['id']);
             $vlr2 = fs(rmdominio($_POST['mensagem']));
@@ -344,7 +344,7 @@ class Account {
             }
         }
     }
-    static function adicionar_amigo($conn) {
+    static function adicionar_amigo() {
         if (isset($_POST['enviaramizade'])) {
             $vlr1 = fs($_POST['id']);
             $vlr2 = fs($_POST['id_dois']);

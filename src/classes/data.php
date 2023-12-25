@@ -9,7 +9,7 @@ if (strrpos($_SERVER["REQUEST_URI"], ".php") || strrpos($_SERVER["REQUEST_URI"],
 
 class Data
 {
-    static function usuarios_online($conn)
+    static function usuarios_online()
     {
         $qr = "SELECT * FROM users WHERE online='1'";
         if ($r = mysqli_query($conn, $qr)) {
@@ -18,7 +18,7 @@ class Data
             mysqli_free_result($r);
         }
     }
-    static function usuarios_registrados($conn)
+    static function usuarios_registrados()
     {
         $qr = "SELECT * FROM users";
         if ($r = mysqli_query($conn, $qr)) {
@@ -27,7 +27,7 @@ class Data
             mysqli_free_result($r);
         }
     }
-    static function items($conn)
+    static function items()
     {
         $qr = "SELECT * FROM items";
         if ($r = mysqli_query($conn, $qr)) {
@@ -36,7 +36,7 @@ class Data
             mysqli_free_result($r);
         }
     }
-    static function conversas($conn)
+    static function conversas()
     {
         $qr = "SELECT * FROM chatlogs_room";
         if ($r = mysqli_query($conn, $qr)) {
@@ -45,7 +45,7 @@ class Data
             mysqli_free_result($r);
         }
     }
-    static function banimentos($conn)
+    static function banimentos()
     {
         $qr = "SELECT * FROM bans";
         if ($r = mysqli_query($conn, $qr)) {

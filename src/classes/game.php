@@ -11,7 +11,7 @@ if (strrpos($_SERVER["REQUEST_URI"], ".php") || strrpos($_SERVER["REQUEST_URI"],
 }
 
 class Game {
-    static function sso($conn) {
+    static function sso() {
         $sso = strtotime("Now");
         $ssonome = "Salsa-";
         $ssofix = rand(1, 999);

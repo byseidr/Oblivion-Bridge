@@ -9,7 +9,7 @@ if (strrpos($_SERVER["REQUEST_URI"], ".php") || strrpos($_SERVER["REQUEST_URI"],
 
 class Hk
 {
-    static function banir_usuario($conn)
+    static function banir_usuario()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = fs($_POST['vlr1']);
@@ -42,7 +42,7 @@ class Hk
             }
         }
     }
-    static function desbanir_usuario($conn)
+    static function desbanir_usuario()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1 = fs($_POST['vlr1']);
@@ -57,7 +57,7 @@ class Hk
             echo '</div>';
         }
     }
-    static function contas_fakes($conn)
+    static function contas_fakes()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1 = fs($_POST['vlr1']);
@@ -84,7 +84,7 @@ class Hk
             }
         }
     }
-    static function publicar_noticia($conn)
+    static function publicar_noticia()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = $_POST['news'];
@@ -99,7 +99,7 @@ class Hk
             echo '</div>';
         }
     }
-    static function dar_emblema($conn)
+    static function dar_emblema()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1 = fs($_POST['vlr1']);
@@ -116,7 +116,7 @@ class Hk
             echo '</div>';
         }
     }
-    static function dar_pontospromocao($conn)
+    static function dar_pontospromocao()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1 = fs($_POST['vlr1']);
@@ -131,7 +131,7 @@ class Hk
             echo '</div>';
         }
     }
-    static function premiar_usuario($conn)
+    static function premiar_usuario()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = fs($_POST['vlr1']);
@@ -175,7 +175,7 @@ class Hk
             }
         }
     }
-    static function dar_cargo($conn)
+    static function dar_cargo()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = fs($_POST['vlr1']);
@@ -187,7 +187,7 @@ class Hk
             echo '</div>';
         }
     }
-    static function ativardstv_promocao($conn)
+    static function ativardstv_promocao()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = fs($_POST['vlr1']);
@@ -203,7 +203,7 @@ class Hk
             echo '</div>';
         }
     }
-    static function remover_emblema($conn)
+    static function remover_emblema()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1 = fs($_POST['vlr1']);
@@ -220,7 +220,7 @@ class Hk
             echo '</div>';
         }
     }
-    static function editar_noticia($conn)
+    static function editar_noticia()
     {
         if (isset($_POST['fnvlr'])) {
             $vlr1    = $_POST['news'];
