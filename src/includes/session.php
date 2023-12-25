@@ -144,8 +144,6 @@ define('premiar_codigo_emblema', $_ENV['PAINEL_PREMIAR_CODIGO_EMBLEMA']);
 // Data
 define('ano', date("Y"));
 define('dia', date("d"));
-// Banco de dados
-define('conn', $conn);
 // Notícias
 define('noticiafinal', $noticiafinal);
 // Usuário
