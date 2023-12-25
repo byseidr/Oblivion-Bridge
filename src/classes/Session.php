@@ -6,7 +6,7 @@ include_once 'Filter.php';
 
 class Session
 {
-    function init($db)
+    static function init($db)
     {
         define('U', $_SERVER["REQUEST_URI"]);
         if (isset($_SESSION['usuario']) && isset($_SESSION['senha'])) {

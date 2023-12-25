@@ -4,7 +4,7 @@ namespace Oblivion;
 
 class Filter
 {
-    function camuflar($salsaencodest)
+    static function camuflar($salsaencodest)
     {
         $salsaencodest = trim($salsaencodest);
         $salsaencode   = $salsaencodest;
@@ -53,7 +53,7 @@ class Filter
         $salsaencodest = str_replace(")", "", $salsaencode);
         return $salsaencodest;
     }
-    function fs($str)
+    static function fs($str)
     {
         $str   = htmlspecialchars(trim($str));
         $texto = $str;
@@ -82,7 +82,7 @@ class Filter
         $str   = str_replace(")", "", $texto);
         return $str;
     }
-    function rmdominio($link)
+    static function rmdominio($link)
     {
         if (preg_match("/^(http:\/\/|www.)/i", $link)) {
             $vlrtexto = preg_replace("/^(http:\/\/)*(www.)*/is", "", $link);
@@ -92,7 +92,7 @@ class Filter
         $vlrtexto = explode(".", $vlrtexto);
         return $vlrtexto[0];
     }
-    function noticia($str)
+    static function noticia($str)
     {
         $str   = htmlspecialchars(trim($str));
         $texto = $str;
